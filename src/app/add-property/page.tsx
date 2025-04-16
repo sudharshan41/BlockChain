@@ -4,6 +4,8 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {useToast} from "@/hooks/use-toast";
 
 const AddPropertyPage = () => {
   const [location, setLocation] = useState('');
@@ -12,18 +14,46 @@ const AddPropertyPage = () => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const router = useRouter();
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle add property logic here
-    console.log('Add Property submitted', {
+
+    const newProperty = {
       location,
       area,
       measurement,
       price,
       description,
       imageUrl,
+    };
+
+    // Get existing properties from local storage or initialize an empty array
+    let storedProperties = localStorage.getItem('properties');
+    let properties = storedProperties ? JSON.parse(storedProperties) : [];
+
+    // Add the new property to the array
+    properties.push(newProperty);
+
+    // Store the updated array back in local storage
+    localStorage.setItem('properties', JSON.stringify(properties));
+
+    console.log('Property added successfully:', newProperty);
+    toast({
+      title: "Property Added",
+      description: `Your property at ${location} has been successfully added.`,
     });
+
+    // Clear the form fields after submission
+    setLocation('');
+    setArea('');
+    setMeasurement('');
+    setPrice('');
+    setDescription('');
+    setImageUrl('');
+
+    router.push('/properties');
   };
 
   return (
