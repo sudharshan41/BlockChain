@@ -2,6 +2,7 @@
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
+import {useToast} from "@/hooks/use-toast"
 
 // Dummy data for property listings
 const properties = [
@@ -13,6 +14,7 @@ const properties = [
     price: '5 ETH',
     description: 'Beautiful farmland for rent',
     imageUrl: 'https://picsum.photos/400/300',
+    landlordId: 'landlord1', // Add landlordId
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ const properties = [
     price: '3 ETH',
     description: 'Prime plot near the beach',
     imageUrl: 'https://picsum.photos/400/301',
+    landlordId: 'landlord2', // Add landlordId
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ const properties = [
     price: '4 ETH',
     description: 'Fertile land near Lake Victoria',
     imageUrl: 'https://picsum.photos/400/302',
+    landlordId: 'landlord1', // Add landlordId
   },
 ];
 
@@ -58,9 +62,24 @@ interface Property {
   price: string;
   description: string;
   imageUrl: string;
+  landlordId: string; // Add landlordId to the Property interface
 }
 
 const PropertyCard = ({property}: {property: Property}) => {
+  const { toast } = useToast()
+
+  const handleShowInterest = () => {
+    // In a real application, you would:
+    // 1. Send a notification to the landlord (property.landlordId)
+    // 2. Store the user's interest in the property (property.id)
+    console.log(`Interest shown for property ${property.id} (Landlord: ${property.landlordId})`);
+
+    toast({
+      title: "Interest Sent!",
+      description: `Your interest in the property at ${property.location} has been sent to the landlord.`,
+    })
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -72,7 +91,7 @@ const PropertyCard = ({property}: {property: Property}) => {
         <p className="text-lg font-semibold">{property.price} / month</p>
         <p>Area: {property.area}</p>
         <p>Measurement: {property.measurement}</p>
-        <Button className="mt-2 w-full">Show Interest</Button>
+        <Button className="mt-2 w-full" onClick={handleShowInterest}>Show Interest</Button>
       </CardContent>
     </Card>
   );
