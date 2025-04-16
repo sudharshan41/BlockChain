@@ -46,30 +46,6 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Placeholder property cards */}
-          <Card className="rounded-lg shadow-md overflow-hidden">
-            <img src="https://picsum.photos/400/300" alt="Property" className="w-full h-48 object-cover" />
-            <CardContent className="p-4">
-              <CardTitle className="text-xl font-semibold text-earthy-green mb-2">Serene Acres</CardTitle>
-              <CardDescription className="text-gray-600">A peaceful land with great potential.</CardDescription>
-            </CardContent>
-          </Card>
-          <Card className="rounded-lg shadow-md overflow-hidden">
-            <img src="https://picsum.photos/401/300" alt="Property" className="w-full h-48 object-cover" />
-            <CardContent className="p-4">
-              <CardTitle className="text-xl font-semibold text-earthy-green mb-2">Rolling Hills</CardTitle>
-              <CardDescription className="text-gray-600">Expansive land with scenic views.</CardDescription>
-            </CardContent>
-          </Card>
-          <Card className="rounded-lg shadow-md overflow-hidden">
-            <img src="https://picsum.photos/400/301" alt="Property" className="w-full h-48 object-cover" />
-            <CardContent className="p-4">
-              <CardTitle className="text-xl font-semibold text-earthy-green mb-2">Green Valley</CardTitle>
-              <CardDescription className="text-gray-600">Lush green land perfect for agriculture.</CardDescription>
-            </CardContent>
-          </Card>
-        </section>
       </main>
 
       <footer className="bg-earthy-green text-white text-center py-4 mt-16">
@@ -78,3 +54,4 @@ export default function Home() {
     </div>
   );
 }
+
