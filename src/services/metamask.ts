@@ -77,6 +77,7 @@ export async function sendTransaction(toAddress: string, amount: number): Promis
       from: window.ethereum.selectedAddress, // must match user's active address.
       value: amountInWei, // Only send 0.0001 ETH
       gas: '0x76c0', // 30400,
+      chainId: '0xaa36a7', // Sepolia chain ID
     };
 
     // Sign the transaction via Metamask

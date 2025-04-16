@@ -1,3 +1,4 @@
+
 const hre = require("hardhat");
 
 async function main() {
@@ -6,7 +7,7 @@ async function main() {
 
   await terraLease.deployed();
 
-  console.log("TerraLease deployed to:", terraLease.address);
+  console.log("TerraLease deployed to Sepolia:", terraLease.address);
 }
 
 main()
