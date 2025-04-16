@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -41,6 +42,11 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom colors */
+    --earthy-green: 50 55% 23%; /* #388E3C in HSL */
+    --light-beige: 48 54% 95%; /* #F5F5DC in HSL */
+    --golden-yellow: 46 100% 50%; /* #FFC107 in HSL */
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -75,6 +81,36 @@ body {
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+     /* Custom colors */
+     --earthy-green: 126 40% 23%;
+     --light-beige: 48 54% 95%;
+     --golden-yellow: 46 100% 50%;
+  }
+
+  /* Use custom colors in Tailwind CSS */
+  .bg-earthy-green {
+    background-color: hsl(var(--earthy-green));
+  }
+
+  .bg-light-beige {
+    background-color: hsl(var(--light-beige));
+  }
+
+  .text-earthy-green {
+    color: hsl(var(--earthy-green));
+  }
+
+  .text-light-beige {
+    color: hsl(var(--light-beige));
+  }
+
+  .bg-golden-yellow {
+    background-color: hsl(var(--golden-yellow));
+  }
+
+  .text-golden-yellow {
+    color: hsl(var(--golden-yellow));
   }
 }
 
