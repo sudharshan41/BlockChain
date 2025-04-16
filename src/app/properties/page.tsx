@@ -103,7 +103,9 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
         <CardDescription>{property.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <img src={property.imageUrl} alt="Property" className="rounded-md mb-4" />
+        {property.imageUrl ? (
+          <img src={property.imageUrl} alt="Property" className="rounded-md mb-4" />
+        ) : null}
         <p className="text-lg font-semibold">{property.price} ETH / month</p>
         <p>Area: {property.area}</p>
         <p>Measurement: {property.measurement}</p>
@@ -115,3 +117,5 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
 };
 
 export default PropertiesPage;
+
+    
