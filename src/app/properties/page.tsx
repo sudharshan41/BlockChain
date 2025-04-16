@@ -86,6 +86,12 @@ const PropertyCard = ({
   disabled: boolean;
 }) => {
   const { toast } = useToast();
+  const [soldOut, setSoldOut] = useState(disabled);
+
+  useEffect(() => {
+    setSoldOut(disabled);
+  }, [disabled]);
+
 
   const handleRentProperty = async () => {
     if (!userAccount) {
@@ -97,7 +103,7 @@ const PropertyCard = ({
     }
 
     try {
-      const transaction = await sendTransaction('0xf39Fd6e51B749D6156e541f86E93BCB58736a950', parseFloat(property.price));
+      const transaction = await sendTransaction('0x44c24fA45877aA9bc9A782b1B4962ACF4d89Ec4C', parseFloat(property.price));
       if (transaction) {
         console.log('Transaction successful:', transaction.hash);
         toast({
@@ -105,6 +111,7 @@ const PropertyCard = ({
           description: `Your rent request for the property at ${property.location} has been sent. Transaction Hash: ${transaction.hash}`,
         });
         onRentSuccess();
+        setSoldOut(true);
       } else {
         toast({
           title: "Transaction Failed",
@@ -135,14 +142,21 @@ const PropertyCard = ({
       </CardHeader>
       <CardContent>
         {property.imageUrl ? (
-          <img src={property.imageUrl} alt="Property" className="rounded-md mb-4" />
+          <div className="relative">
+            <img src={property.imageUrl} alt="Property" className="rounded-md mb-4" />
+            {soldOut && (
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 rounded-md">
+                <span className="text-2xl font-bold text-white">Sold Out</span>
+              </div>
+            )}
+          </div>
         ) : null}
         <p className="text-lg font-semibold">{property.price} ETH / month</p>
         <p>Area: {property.area}</p>
         <p>Measurement: {property.measurement}</p>
-        <Button className="mt-2 w-full" onClick={handleShowInterest} disabled={disabled}>Show Interest</Button>
-        <Button className="mt-2 w-full" onClick={handleRentProperty} disabled={disabled}>
-          {disabled ? 'Rented' : 'Rent with Ethereum'}
+        <Button className="mt-2 w-full" onClick={handleShowInterest} disabled={soldOut}>Show Interest</Button>
+        <Button className="mt-2 w-full" onClick={handleRentProperty} disabled={soldOut}>
+          {soldOut ? 'Sold Out' : 'Rent with Ethereum'}
         </Button>
       </CardContent>
     </Card>
