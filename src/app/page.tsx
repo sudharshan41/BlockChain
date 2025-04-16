@@ -8,6 +8,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {Icons} from "@/components/icons";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {ethers} from 'ethers';
 
 export default function Home() {
   const [account, setAccount] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export default function Home() {
           <Link href="/" className="text-2xl font-bold">BlockChain Rental System</Link>
           <nav className="space-x-4">
             <Link href="/login">
-              <Button variant="outline" className="text-white hover:text-golden-yellow">Login</Button>
+              <Button variant="secondary" className="bg-golden-yellow text-earthy-green hover:bg-light-beige hover:text-earthy-green">Login</Button>
             </Link>
             <Link href="/register">
               <Button variant="secondary" className="bg-golden-yellow text-earthy-green hover:bg-light-beige hover:text-earthy-green">Register</Button>
@@ -54,4 +55,5 @@ export default function Home() {
     </div>
   );
 }
+
 
