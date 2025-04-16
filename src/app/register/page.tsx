@@ -4,16 +4,20 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import Link from 'next/link';
 import {useState} from 'react';
+import {useRouter} from 'next/navigation';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLandlord, setIsLandlord] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle registration logic here
     console.log('Registration submitted', {email, password, isLandlord});
+    // Redirect to home page after successful registration
+    router.push('/');
   };
 
   return (
@@ -107,3 +111,5 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+    
