@@ -129,13 +129,6 @@ const PropertyCard = ({
     }
   };
 
-  const handleShowInterest = () => {
-    toast({
-      title: "Interest Sent!",
-      description: `Your interest in the property at ${property.location} has been sent to the landlord.`,
-    });
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -156,7 +149,6 @@ const PropertyCard = ({
         <p className="text-lg font-semibold">{property.price} ETH / month</p>
         <p>Area: {property.area}</p>
         <p>Measurement: {property.measurement}</p>
-        <Button className="mt-2 w-full" onClick={handleShowInterest} disabled={soldOut}>Show Interest</Button>
         <Button className="mt-2 w-full" onClick={handleRentProperty} disabled={soldOut}>
           {soldOut ? 'Sold Out' : 'Rent with Ethereum'}
         </Button>
