@@ -1,0 +1,165 @@
+'use client';
+
+import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {Textarea} from '@/components/ui/textarea';
+import {useState} from 'react';
+
+const AddPropertyPage = () => {
+  const [location, setLocation] = useState('');
+  const [area, setArea] = useState('');
+  const [measurement, setMeasurement] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle add property logic here
+    console.log('Add Property submitted', {
+      location,
+      area,
+      measurement,
+      price,
+      description,
+      imageUrl,
+    });
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        <h1 className="text-2xl font-bold text-center mb-4">
+          Add New Property
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Location
+            </label>
+            <div className="mt-1">
+              <Input
+                id="location"
+                name="location"
+                type="text"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Property Location"
+                value={location}
+                onChange={e => setLocation(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="area" className="block text-sm font-medium text-gray-700">
+              Area (sq ft)
+            </label>
+            <div className="mt-1">
+              <Input
+                id="area"
+                name="area"
+                type="text"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Area in square feet"
+                value={area}
+                onChange={e => setArea(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="measurement"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Measurement
+            </label>
+            <div className="mt-1">
+              <Input
+                id="measurement"
+                name="measurement"
+                type="text"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="e.g., Acres, Hectares"
+                value={measurement}
+                onChange={e => setMeasurement(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+              Price (ETH)
+            </label>
+            <div className="mt-1">
+              <Input
+                id="price"
+                name="price"
+                type="text"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Price in ETH"
+                value={price}
+                onChange={e => setPrice(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <div className="mt-1">
+              <Textarea
+                id="description"
+                name="description"
+                rows={3}
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Detailed property description"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="imageUrl"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Image URL
+            </label>
+            <div className="mt-1">
+              <Input
+                id="imageUrl"
+                name="imageUrl"
+                type="url"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="URL of property image"
+                value={imageUrl}
+                onChange={e => setImageUrl(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <Button type="submit" className="w-full">
+              Add Property
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AddPropertyPage;
