@@ -125,10 +125,41 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
     // 2. Store the user's interest in the property (property.id)
     console.log(`Interest shown for property ${property.id} (Landlord: ${property.landlordId})`);
 
+    // Placeholder: Simulate sending a notification to the landlord
     toast({
       title: "Interest Sent!",
       description: `Your interest in the property at ${property.location} has been sent to the landlord.`,
-    })
+    });
+
+    // Here, you would typically trigger a backend call to notify the landlord.
+    // This could be an API endpoint that sends an email, a push notification,
+    // or updates a database to indicate the tenant's interest.
+
+    // Example:
+    // fetch('/api/notify-landlord', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     landlordId: property.landlordId,
+    //     propertyId: property.id,
+    //     tenantId: userAccount, // Assuming userAccount is the tenant's address
+    //   }),
+    // })
+    // .then(response => {
+    //   if (!response.ok) {
+    //     throw new Error('Failed to notify landlord');
+    //   }
+    //   console.log('Landlord notified successfully');
+    // })
+    // .catch(error => {
+    //   console.error('Error notifying landlord:', error);
+    //   toast({
+    //     title: "Error",
+    //     description: "Failed to send interest notification to the landlord.",
+    //   });
+    // });
   };
 
   return (

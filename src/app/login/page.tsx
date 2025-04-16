@@ -10,16 +10,23 @@ import {connectToMetaMask} from '@/services/metamask';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginType, setLoginType] = useState<'tenant' | 'landlord' | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login submitted', {email, password});
 
-    // Placeholder logic: Assume login is successful and user is a tenant.
-    // In a real application, you would authenticate against a backend.
-    router.push('/properties'); // Redirect to properties page after login
+    // Handle login logic here, differentiate between tenant and landlord
+    console.log('Login submitted', {email, password, loginType});
+
+    // Placeholder logic: Assume login is successful and redirect accordingly
+    if (loginType === 'tenant') {
+      router.push('/properties'); // Redirect to properties page after login
+    } else if (loginType === 'landlord') {
+      router.push('/add-property'); // Redirect to landlord dashboard or properties management page
+    } else {
+      alert('Please select a login type.');
+    }
   };
 
   const handleConnectWallet = async () => {
@@ -95,6 +102,28 @@ const LoginPage = () => {
           </div>
 
           <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Login as:
+            </label>
+            <div className="mt-2 flex justify-around">
+              <Button
+                type="button"
+                variant={loginType === 'tenant' ? 'default' : 'outline'}
+                onClick={() => setLoginType('tenant')}
+              >
+                Tenant
+              </Button>
+              <Button
+                type="button"
+                variant={loginType === 'landlord' ? 'default' : 'outline'}
+                onClick={() => setLoginType('landlord')}
+              >
+                Landlord
+              </Button>
+            </div>
+          </div>
+
+          <div>
             <Button type="submit" className="w-full">
               Login
             </Button>
@@ -112,5 +141,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-    
