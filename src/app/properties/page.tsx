@@ -191,3 +191,4 @@ const PropertyCard = ({
 };
 
 export default PropertiesPage;
+
