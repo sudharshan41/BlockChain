@@ -25,7 +25,7 @@ export default function Home() {
     <div className="min-h-screen bg-light-beige">
       <header className="bg-earthy-green text-white py-4 shadow-md">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">TerraLease</Link>
+          <Link href="/" className="text-2xl font-bold">BlockChain Rental System</Link>
           <nav className="space-x-4">
             <Link href="/login">
               <Button variant="outline" className="text-white hover:text-golden-yellow">Login</Button>
@@ -73,7 +73,7 @@ export default function Home() {
       </main>
 
       <footer className="bg-earthy-green text-white text-center py-4 mt-16">
-        <p>&copy; {new Date().getFullYear()} TerraLease. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} BlockChain Rental System. All rights reserved.</p>
       </footer>
     </div>
   );
