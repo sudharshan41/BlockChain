@@ -14,6 +14,7 @@ const AddPropertyPage = () => {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [walletAddress, setWalletAddress] = useState(''); // New state for wallet address
   const router = useRouter();
   const { toast } = useToast();
 
@@ -27,6 +28,7 @@ const AddPropertyPage = () => {
       price,
       description,
       imageUrl,
+      walletAddress, // Include wallet address in the property object
     };
 
     // Get existing properties from local storage or initialize an empty array
@@ -52,7 +54,7 @@ const AddPropertyPage = () => {
     setPrice('');
     setDescription('');
     setImageUrl('');
-
+    setWalletAddress(''); // Clear wallet address field
     router.push('/properties');
   };
 
@@ -177,6 +179,26 @@ const AddPropertyPage = () => {
                 placeholder="URL of property image"
                 value={imageUrl}
                 onChange={e => setImageUrl(e.target.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="walletAddress"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Wallet Address
+            </label>
+            <div className="mt-1">
+              <Input
+                id="walletAddress"
+                name="walletAddress"
+                type="text"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Enter your wallet address"
+                value={walletAddress}
+                onChange={e => setWalletAddress(e.target.value)}
               />
             </div>
           </div>

@@ -13,6 +13,7 @@ interface Property {
   price: string;
   description: string;
   imageUrl: string;
+  walletAddress: string; // Include wallet address in the Property interface
 }
 
 const PropertiesPage = () => {
@@ -103,7 +104,8 @@ const PropertyCard = ({
     }
 
     try {
-      const transaction = await sendTransaction('0x44c24fA45877aA9bc9A782b1B4962ACF4d89Ec4C', parseFloat(property.price));
+      // Use the wallet address from the property details
+      const transaction = await sendTransaction(property.walletAddress, parseFloat(property.price));
       if (transaction) {
         console.log('Transaction successful:', transaction.hash);
         toast({
