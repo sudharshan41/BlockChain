@@ -21,6 +21,7 @@ const PropertiesPage = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [account, setAccount] = useState<string | null>(null);
   const [rentedProperties, setRentedProperties] = useState<string[]>([]);
+  const [isLandlord, setIsLandlord] = useState(false);
 
   useEffect(() => {
     async function getAccount() {
@@ -39,6 +40,10 @@ const PropertiesPage = () => {
     if (storedRentedProperties) {
       setRentedProperties(JSON.parse(storedRentedProperties));
     }
+
+    // Check if the user is a landlord (e.g., based on localStorage or some other state)
+    const landlordStatus = localStorage.getItem('isLandlord');
+    setIsLandlord(landlordStatus === 'true'); // Convert string to boolean
   }, []);
 
   useEffect(() => {
@@ -63,6 +68,7 @@ const PropertiesPage = () => {
               key={index}
               property={property}
               userAccount={account}
+              isLandlord={isLandlord}
               onRentSuccess={() => {
                 setRentedProperties([...rentedProperties, property.location]);
               }}
@@ -81,12 +87,14 @@ const PropertiesPage = () => {
 const PropertyCard = ({
   property,
   userAccount,
+  isLandlord,
   onRentSuccess,
   onDelete,
   disabled,
 }: {
   property: Property;
   userAccount: string;
+  isLandlord: boolean;
   onRentSuccess: () => void;
   onDelete: () => void;
   disabled: boolean;
@@ -158,23 +166,25 @@ const PropertyCard = ({
         <Button className="mt-2 w-full" onClick={handleRentProperty} disabled={soldOut}>
           {soldOut ? 'Sold Out' : 'Rent with Ethereum'}
         </Button>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="destructive" className="mt-2 w-full">Delete Property</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete this property from the available listings.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onDelete}>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        {isLandlord && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive" className="mt-2 w-full">Delete Property</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete this property from the available listings.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={onDelete}>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
       </CardContent>
     </Card>
   );
