@@ -18,6 +18,7 @@ interface Property {
 const PropertiesPage = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [account, setAccount] = useState<string | null>(null);
+  const [rentedProperties, setRentedProperties] = useState<string[]>([]);
 
   useEffect(() => {
     async function getAccount() {
@@ -32,7 +33,22 @@ const PropertiesPage = () => {
     let storedProperties = localStorage.getItem('properties');
     let initialProperties = storedProperties ? JSON.parse(storedProperties) : [];
     setProperties(initialProperties);
+
+    // Load rented properties from local storage
+    const storedRentedProperties = localStorage.getItem('rentedProperties');
+    if (storedRentedProperties) {
+      setRentedProperties(JSON.parse(storedRentedProperties));
+    }
   }, []);
+
+  useEffect(() => {
+    // Save rented properties to local storage whenever it changes
+    localStorage.setItem('rentedProperties', JSON.stringify(rentedProperties));
+  }, [rentedProperties]);
+
+  const handleRentProperty = async (property: Property) => {
+
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -44,6 +60,10 @@ const PropertiesPage = () => {
               key={index}
               property={property}
               userAccount={account}
+              onRentSuccess={() => {
+                setRentedProperties([...rentedProperties, property.location]);
+              }}
+              disabled={rentedProperties.includes(property.location)}
             />
           ))}
         </section>
@@ -54,7 +74,17 @@ const PropertiesPage = () => {
   );
 };
 
-const PropertyCard = ({property, userAccount}: {property: Property, userAccount: string}) => {
+const PropertyCard = ({
+  property,
+  userAccount,
+  onRentSuccess,
+  disabled,
+}: {
+  property: Property;
+  userAccount: string;
+  onRentSuccess: () => void;
+  disabled: boolean;
+}) => {
   const { toast } = useToast();
 
   const handleRentProperty = async () => {
@@ -74,6 +104,7 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
           title: "Rent Request Sent",
           description: `Your rent request for the property at ${property.location} has been sent. Transaction Hash: ${transaction.hash}`,
         });
+        onRentSuccess();
       } else {
         toast({
           title: "Transaction Failed",
@@ -82,10 +113,10 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
       }
     } catch (error: any) {
       console.error("Error sending transaction:", error);
-        toast({
-          title: "Transaction Error",
-          description: `An error occurred: ${error.message}`,
-        });
+      toast({
+        title: "Transaction Error",
+        description: `An error occurred: ${error.message}`,
+      });
     }
   };
 
@@ -109,13 +140,13 @@ const PropertyCard = ({property, userAccount}: {property: Property, userAccount:
         <p className="text-lg font-semibold">{property.price} ETH / month</p>
         <p>Area: {property.area}</p>
         <p>Measurement: {property.measurement}</p>
-        <Button className="mt-2 w-full" onClick={handleShowInterest}>Show Interest</Button>
-        <Button className="mt-2 w-full" onClick={handleRentProperty}>Rent with Ethereum</Button>
+        <Button className="mt-2 w-full" onClick={handleShowInterest} disabled={disabled}>Show Interest</Button>
+        <Button className="mt-2 w-full" onClick={handleRentProperty} disabled={disabled}>
+          {disabled ? 'Rented' : 'Rent with Ethereum'}
+        </Button>
       </CardContent>
     </Card>
   );
 };
 
 export default PropertiesPage;
-
-    
