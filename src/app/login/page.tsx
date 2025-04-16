@@ -4,15 +4,32 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import Link from 'next/link';
 import {useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {connectToMetaMask} from '@/services/metamask';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
     console.log('Login submitted', {email, password});
+
+    // Placeholder logic: Assume login is successful and user is a tenant.
+    // In a real application, you would authenticate against a backend.
+    router.push('/properties'); // Redirect to properties page after login
+  };
+
+  const handleConnectWallet = async () => {
+    const account = await connectToMetaMask();
+    if (account) {
+      console.log('Connected to MetaMask with account:', account.address);
+      // Optionally store the account in local storage or state for later use.
+    } else {
+      console.log('Could not connect to MetaMask.');
+    }
   };
 
   return (
@@ -83,9 +100,17 @@ const LoginPage = () => {
             </Button>
           </div>
         </form>
+
+        <div className="mt-6">
+          <Button variant="secondary" className="w-full" onClick={handleConnectWallet}>
+            Connect MetaMask
+          </Button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default LoginPage;
+
+    
