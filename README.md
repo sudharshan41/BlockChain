@@ -1,5 +1,5 @@
-# Firebase Studio
+Blockchain 
 
-This is a NextJS starter in Firebase Studio.
+npm install
 
-To get started, take a look at src/app/page.tsx.
+npm run dev
