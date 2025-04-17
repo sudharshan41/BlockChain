@@ -26,7 +26,6 @@ export default function Home() {
     <div className="min-h-screen bg-light-beige">
       <header className="bg-earthy-green text-white py-4 shadow-md">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">BlockChain Rental System</Link>
           <nav className="space-x-4">
             <Link href="/login">
               <Button variant="secondary" className="bg-golden-yellow text-earthy-green hover:bg-light-beige hover:text-earthy-green">Login</Button>
@@ -40,8 +39,7 @@ export default function Home() {
 
       <main className="container mx-auto py-12">
         <section className="text-center">
-          <h1 className="text-4xl font-extrabold text-earthy-green mb-6">Find Your Perfect Land</h1>
-          <p className="text-gray-700 text-lg mb-8">Browse, connect, and lease land properties with ease.</p>
+          
           <Link href="/properties">
             <Button className="bg-golden-yellow text-earthy-green hover:bg-light-beige hover:text-earthy-green text-lg px-8 py-3">Explore Properties</Button>
           </Link>
@@ -55,5 +53,3 @@ export default function Home() {
     </div>
   );
 }
-
-
