@@ -26,7 +26,7 @@ export default function Home() {
     <div className="min-h-screen bg-light-beige">
       <header className="bg-earthy-green text-white py-4 shadow-md">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <nav className="space-x-4">
+         <nav className="space-x-4">
             <Link href="/login">
               <Button variant="secondary" className="bg-golden-yellow text-earthy-green hover:bg-light-beige hover:text-earthy-green">Login</Button>
             </Link>
@@ -53,3 +53,4 @@ export default function Home() {
     </div>
   );
 }
+
